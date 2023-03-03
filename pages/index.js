@@ -173,7 +173,7 @@ export default function Home() {
           <div className={styles.thirteen}>
             <Image
               src="/keystone.svg"
-              alt="13"
+              alt="keystone"
               width={40}
               height={31}
               priority
