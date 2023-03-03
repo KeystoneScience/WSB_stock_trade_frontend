@@ -1,3 +1,4 @@
+
 .main {
   display: flex;
   flex-direction: column;
@@ -95,6 +96,12 @@
   z-index: -1;
 }
 
+.screen-content-width-two-third {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2%;
+}
+
 .center::before,
 .center::after {
   content: '';
@@ -115,8 +122,6 @@
   align-items: center;
   width: 75px;
   height: 75px;
-  padding: 25px 10px;
-  margin-left: 16px;
   transform: translateZ(0);
   border-radius: var(--border-radius);
   overflow: hidden;
