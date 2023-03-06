@@ -147,9 +147,9 @@ export default function Home() {
       data.history.profit_loss_pct[data.history.profit_loss_pct.length - 1];
     const profitCash =
       data.history.equity[data.history.equity.length - 1] - 50000;
-    return `${profitCash > 0 ? "+" : "-"}$${profitCash.toFixed(2)} (${
+    return `${profitCash > 0 ? "+" : ""}$${profitCash.toFixed(2)} (${
       profit > 0 ? "+" : ""
-    }${(((profitCash - 50000) / 50000) * 100).toFixed(2)}%)`;
+    }${((profitCash / 50000) * 100).toFixed(2)}%)`;
   }
   return (
     <>
