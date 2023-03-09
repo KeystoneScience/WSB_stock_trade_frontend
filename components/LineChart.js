@@ -44,7 +44,6 @@ export default function SimpleGraphReport({ data }) {
               reverse: false,
             }}
             sliceTooltip={({ slice }) => {
-              console.log(slice);
               return (
                 <div className="bg-jacarta-500 p-2 rounded-md">
                   <div>${slice.points[0].data.yFormatted}</div>
@@ -91,8 +90,8 @@ export default function SimpleGraphReport({ data }) {
             pointBorderWidth={2}
             pointBorderColor={
               data?.equity[data?.equity?.length - 1] < 50000
-                ? ["#D50000"]
-                : ["#42f563"]
+                ? "#D50000"
+                : "#42f563"
             }
             pointLabelYOffset={-12}
             useMesh={true}

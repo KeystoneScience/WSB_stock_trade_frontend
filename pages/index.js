@@ -207,7 +207,7 @@ export default function Home() {
               </h1>
             </div>
             <History {...data} />
-            <Orders {...data} />
+            <Orders orders={data?.orders} />
           </div>
         )}
       </main>
@@ -217,9 +217,33 @@ export default function Home() {
 
 //this function returns a list of all the orders in the data object
 function Orders({ orders }) {
+  const [sortedOrders, setSortedOrders] = useState([]);
+
+  useEffect(() => {
+    //make a copy of the orders array, and then sort it so that newest orders are first
+    console.log("STARTING");
+    const ordersCopy = [...orders];
+    ordersCopy.sort((a, b) => {
+      console.log(a.date);
+      const aDate = new Date(a.date);
+      const bDate = new Date(b.date);
+      console.log(
+        "A Date: ",
+        aDate,
+        "B Date: ",
+        bDate,
+        "B - A: ",
+        bDate - aDate
+      );
+      return bDate - aDate;
+    });
+    console.log(ordersCopy);
+    setSortedOrders([...ordersCopy]);
+  }, [JSON.stringify(orders)]);
+
   function cleanDateString(recordedDate) {
     const date = new Date(recordedDate);
-    return `${date.getMonth()}/${date.getDay()}/${date.getFullYear()}`;
+    return date.toISOString().split("T")[0];
   }
   //filter out the orders that are not buy orders
   orders = orders.filter((order) => order.side === "buy");
@@ -228,13 +252,13 @@ function Orders({ orders }) {
     <div className="flex flex-col w-full">
       <h1 className="text-2xl font-bold text-white">Orders</h1>
       <div className="flex flex-col rounded-md bg-black/40 border-2 p-5 max-h-[500px] overflow-y-scroll">
-        {orders.map((order) => (
-          <div className="flex flex-row">
+        {sortedOrders.map((order, index) => (
+          <div className="flex flex-row" key={index}>
             <div className="flex flex-col">
               <p className="text-white text-lg underline underline-offset-4">
                 STOCK: {order.symbol}
               </p>
-              <p className="text-white">PRICE: {order.price}</p>
+              <p className="text-white">PRICE: ${order.price}</p>
               <p className="text-white">QUANTITY: {order.quantity}</p>
               <p className="text-white">{cleanDateString(order.date)}</p>
             </div>
